@@ -328,8 +328,9 @@ public class DateUtil {
 
     /**
      * 获取前xx天
+     *
      * @param date 日期
-     * @param day   天数
+     * @param day  天数
      * @return 格式化的时间
      */
     public static Date getDateBefore(Date date, int day) {
@@ -338,8 +339,9 @@ public class DateUtil {
 
     /**
      * 获取后xx天
+     *
      * @param date 日期
-     * @param day   天数
+     * @param day  天数
      * @return 格式化的时间
      */
     public static Date getDateAfter(Date date, int day) {
@@ -355,6 +357,7 @@ public class DateUtil {
 
     /**
      * 是否同一天
+     *
      * @param day1 day1
      * @param day2 day2
      * @return bool
@@ -372,6 +375,7 @@ public class DateUtil {
 
     /**
      * 是否今天
+     *
      * @param date 日期
      * @return bool
      */
