@@ -3,13 +3,15 @@ package com.mutoublog.service;
 import com.mutoublog.dao.entity.MtArticle;
 import com.mutoublog.dao.entity.MtArticleExample;
 import com.mutoublog.dao.mapper.MtArticleMapper;
-import com.mutoublog.utils.DateUtil;
+import com.mutoublog.dao.mapper.ext.MtArticleMapperExt;
 import com.mutoublog.utils.MtStringUtils;
+import com.mutoublog.utils.RedisUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -19,63 +21,44 @@ import java.util.Map;
  */
 @Service
 public class ArticleServiceImpl implements ArticleService {
+    private static Logger log = LoggerFactory.getLogger(RedisUtil.class);
     @Autowired
     private MtArticleMapper mtArticleMapper;
+    @Autowired
+    private MtArticleMapperExt mtArticleMapperExt;
 
     @Override
-    public MtArticle getArticleByClause(Map clause) {
-        return null;
+    public MtArticle getArticleByClause(String items, MtArticle mtArticle) {
+        if ("".equals(items)) {
+            items = "*";
+        }
+        MtArticleExample mtArticleExample = new MtArticleExample();
+        MtArticleExample.Criteria criteria = mtArticleExample.createCriteria();
+        buildWhereClause(mtArticleExample, criteria, mtArticle);
+        return mtArticleMapperExt.selectSelective(items,mtArticleExample);
     }
 
     @Override
-    public List<MtArticle> getArticlesByClause(Map clause) {
+    public List<MtArticle> getArticlesByClause(Map<String, Object> clause, MtArticle mtArticle) {
         if (clause.isEmpty()) {
             return null;
         }
         try {
             MtArticleExample mtArticleExample = new MtArticleExample();
             MtArticleExample.Criteria criteria = mtArticleExample.createCriteria();
-
-            // 查询条件
-            // uid
-            if (clause.containsKey("uid")){
-                Integer uid = Integer.parseInt(clause.get("uid").toString());
-                if (uid > 0) {
-                    criteria.andUidEqualTo(uid);
-                }
-            }
-            // cate_id
-            if (clause.containsKey("cate_id")){
-                Byte cateId = Byte.parseByte(clause.get("cate_id").toString());
-                if (cateId > 0) {
-                    criteria.andCateIdEqualTo(cateId);
-                }
-            }
-            // is_top
-            if (clause.containsKey("is_top")){
-                byte isTop = Byte.parseByte(clause.get("is_top").toString());
-                if (isTop > 0) {
-                    criteria.andIsTopEqualTo(isTop);
-                }
-            }
-            // create_date
-            if (clause.containsKey("create_date")){
-                Date createDate = DateUtil.stringToDate(clause.get("create_date").toString());
-                if (createDate != null) {
-                    criteria.andCreateDateEqualTo(createDate);
-                }
-            }
+            buildWhereClause(mtArticleExample, criteria, mtArticle);
             // 排序
             String order = "";
-            if (clause.containsKey("order")){
+            if (clause.containsKey("order")) {
                 order = clause.get("order").toString();
             }
-            if (MtStringUtils.isEmpty(order)){
-                order = "id DESC";
+            if (MtStringUtils.isEmpty(order)) {
+                order = "sort ASC,id DESC";
             }
             mtArticleExample.setOrderByClause(order);
             return mtArticleMapper.selectByExample(mtArticleExample);
         } catch (Exception e) {
+            log.error("获取文章信息失败！");
             e.printStackTrace();
             return null;
         }
@@ -123,5 +106,35 @@ public class ArticleServiceImpl implements ArticleService {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    private MtArticleExample.Criteria buildWhereClause(MtArticleExample mtArticleExample, MtArticleExample.Criteria criteria, MtArticle mtArticle) {
+        // 查询条件
+        // uid
+        if (mtArticle.getUid() != null && mtArticle.getUid() > 0) {
+            criteria.andUidEqualTo(mtArticle.getUid());
+        }
+        // cate_id
+        if (mtArticle.getCateId() != null && mtArticle.getCateId() > 0) {
+            criteria.andCateIdEqualTo(mtArticle.getCateId());
+        }
+        // is_top
+        if (mtArticle.getIsTop() != null) {
+            criteria.andIsTopEqualTo(mtArticle.getIsTop());
+        }
+        // create_date
+        if (mtArticle.getCreateDate() != null) {
+            criteria.andCreateDateEqualTo(mtArticle.getCreateDate());
+        }
+        // title
+        if (mtArticle.getTitle() != null && !"".equals(mtArticle.getTitle())) {
+            criteria.andTitleEqualTo(mtArticle.getTitle());
+        }
+        // id
+        if (mtArticle.getId() != null && mtArticle.getId() > 0) {
+            criteria.andIdEqualTo(mtArticle.getId());
+        }
+
+        return criteria;
     }
 }

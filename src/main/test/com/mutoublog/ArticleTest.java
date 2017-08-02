@@ -45,9 +45,22 @@ public class ArticleTest {
     public void testGetArticlesByClause() {
         logger.info("userService.getArticlesByClause");
         Map<String,Object> clauseMap = new HashMap<>();
-        clauseMap.put("uid",1);
+        clauseMap.put("order","sort ASC,id Desc");
 
-        List<MtArticle> articles = articleService.getArticlesByClause(clauseMap);
+        MtArticle mtArticle = new MtArticle();
+        mtArticle.setId(1);
+
+        List<MtArticle> articles = articleService.getArticlesByClause(clauseMap,mtArticle);
         System.out.println("articles :" + articles.toString());
+    }
+
+    @Test
+    public void testGetArticleByClause(){
+        logger.info("userService.getArticleByClause");
+        MtArticle mtArticle = new MtArticle();
+        mtArticle.setId(1);
+
+        MtArticle article = articleService.getArticleByClause("id",mtArticle);
+        System.out.println("article :" + article.toString());
     }
 }

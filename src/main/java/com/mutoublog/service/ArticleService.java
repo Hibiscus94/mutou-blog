@@ -13,10 +13,11 @@ public interface ArticleService {
     /**
      * 根据查询条件返回单条文章信息
      *
-     * @param clause
+     * @param items
+     * @param mtArticle
      * @return
      */
-    MtArticle getArticleByClause(Map clause);
+    MtArticle getArticleByClause(String items, MtArticle mtArticle);
 
     /**
      * 根据查询条件返回多条文章信息
@@ -24,7 +25,7 @@ public interface ArticleService {
      * @param clause
      * @return
      */
-    List<MtArticle> getArticlesByClause(Map clause);
+    List<MtArticle> getArticlesByClause(Map<String, Object> clause, MtArticle mtArticle);
 
     /**
      * 更新文章信息
