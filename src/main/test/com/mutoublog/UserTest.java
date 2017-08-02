@@ -38,6 +38,13 @@ public class UserTest {
     }
 
     @Test
+    public void testGetUserByName(){
+        logger.info("userService.getUserByName");
+        MtUser mtUser = userService.getUserByName("刘顺林");
+        System.out.println(mtUser);
+    }
+
+    @Test
     public void testGetUsersByClause() {
 //        logger.info("userService.getAllUser");
 //        byte isValid = (byte)1;

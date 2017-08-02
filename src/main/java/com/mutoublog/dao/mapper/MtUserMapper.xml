@@ -89,17 +89,12 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByUser" parameterType="java.lang.String" resultMap="BaseResultMap">
+  <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from mt_user
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-    limit 0,1
+    WHERE username = #{username,jdbcType=VARCHAR}
+    LIMIT 0,1
   </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 

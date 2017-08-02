@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public MtUser getUserByName(String userName) {
         try {
-            return mtUserMapper.selectByUser(userName);
+            return mtUserMapper.selectByUserName(userName);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

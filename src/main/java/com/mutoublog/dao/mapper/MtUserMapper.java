@@ -30,5 +30,5 @@ public interface MtUserMapper {
 
     int updateByPrimaryKey(MtUser record);
 
-    MtUser selectByUser(String userName);
+    MtUser selectByUserName(String userName);
 }
