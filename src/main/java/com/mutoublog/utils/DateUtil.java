@@ -3,21 +3,13 @@ package com.mutoublog.utils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
-import java.util.logging.Logger;
+import java.util.Date;
 
 /**
  * com.mutoublog.utils
  * Created by mutou on 2017/6/20.
  */
 public class DateUtil {
-    private static Logger logger = Logger.getLogger(new Object() {
-        public String getClassName() {
-            String className = this.getClass().getName();
-            return className.substring(0, className.lastIndexOf('$'));
-        }
-    }.getClassName());
-
     /**
      * 字符串转日期
      *
@@ -42,7 +34,7 @@ public class DateUtil {
      * @return String
      */
     public static String dateToString(Date date, String type) {
-        String str = null;
+        String str;
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         switch (type) {
             case "SHORT":
@@ -95,27 +87,27 @@ public class DateUtil {
             } else {
                 if (day_diff == 0 && diff < 60) {
                     if (diff == 0) diff = 1;
-                    builder.append(diff + "秒前");
+                    builder.append(diff).append("秒前");
                 } else if (day_diff == 0 && diff < 120) {
                     builder.append("1 分钟前");
                 } else if (day_diff == 0 && diff < 3600) {
-                    builder.append(Math.round(Math.floor(diff / 60)) + "分钟以前");
+                    builder.append(Math.round(Math.floor(diff / 60))).append("分钟以前");
                 } else if (day_diff == 0 && diff < 7200) {
                     builder.append("1小时前");
                 } else if (day_diff == 0 && diff < 86400) {
-                    builder.append(Math.round(Math.floor(diff / 3600)) + "小时前");
+                    builder.append(Math.round(Math.floor(diff / 3600))).append("小时前");
                 } else if (day_diff == 1) {
                     builder.append("1天前");
                 } else if (day_diff < 7) {
-                    builder.append(day_diff + "天前");
+                    builder.append(day_diff).append("天前");
                 } else if (day_diff < 30) {
-                    builder.append(Math.round(Math.ceil(day_diff / 7)) + " 星期前");
-                } else if (day_diff >= 30 && day_diff <= 179) {
-                    builder.append(Math.round(Math.ceil(day_diff / 30)) + "月前");
-                } else if (day_diff >= 180 && day_diff < 365) {
+                    builder.append(Math.round(Math.ceil(day_diff / 7))).append(" 星期前");
+                } else if (day_diff <= 179) {
+                    builder.append(Math.round(Math.ceil(day_diff / 30))).append("月前");
+                } else if (day_diff < 365) {
                     builder.append("半年前");
-                } else if (day_diff >= 365) {
-                    builder.append(Math.round(Math.ceil(day_diff / 30 / 12)) + "年前");
+                } else {
+                    builder.append(Math.round(Math.ceil(day_diff / 30 / 12))).append("年前");
                 }
             }
             return builder.toString();
