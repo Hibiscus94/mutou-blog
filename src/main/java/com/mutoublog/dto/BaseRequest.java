@@ -1,4 +1,4 @@
-package com.mutoublog.BaseDto;
+package com.mutoublog.dto;
 
 import java.io.Serializable;
 

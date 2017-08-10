@@ -1,4 +1,4 @@
-package com.mutoublog.BaseDto;
+package com.mutoublog.dto;
 
 public class Request<T> extends BaseRequest {
     private static final long serialVersionUID = 1L;

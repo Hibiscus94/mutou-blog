@@ -1,4 +1,4 @@
-package com.mutoublog.BaseDto;
+package com.mutoublog.dto;
 
 import java.util.List;
 import java.util.Map;

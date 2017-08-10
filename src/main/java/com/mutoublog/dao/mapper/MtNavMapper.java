@@ -4,7 +4,9 @@ import com.mutoublog.dao.entity.MtNav;
 import com.mutoublog.dao.entity.MtNavExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MtNavMapper {
     long countByExample(MtNavExample example);
 
