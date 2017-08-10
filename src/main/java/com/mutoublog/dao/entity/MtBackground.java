@@ -7,7 +7,7 @@ public class MtBackground implements Serializable {
     /**
      * 主键
      */
-    private Byte id;
+    private Integer id;
 
     /**
      * 图片地址
@@ -15,9 +15,9 @@ public class MtBackground implements Serializable {
     private String img;
 
     /**
-     * 更新时间
+     * 文章id
      */
-    private Date updateTime;
+    private Integer articleId;
 
     /**
      * 分类id
@@ -40,6 +40,16 @@ public class MtBackground implements Serializable {
     private Byte status;
 
     /**
+     * 超链接
+     */
+    private String href;
+
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
+
+    /**
      * mt_background
      */
     private static final long serialVersionUID = 1L;
@@ -48,7 +58,7 @@ public class MtBackground implements Serializable {
      * 主键
      * @return id 主键
      */
-    public Byte getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -56,7 +66,7 @@ public class MtBackground implements Serializable {
      * 主键
      * @param id 主键
      */
-    public void setId(Byte id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -77,19 +87,19 @@ public class MtBackground implements Serializable {
     }
 
     /**
-     * 更新时间
-     * @return update_time 更新时间
+     * 文章id
+     * @return article_id 文章id
      */
-    public Date getUpdateTime() {
-        return updateTime;
+    public Integer getArticleId() {
+        return articleId;
     }
 
     /**
-     * 更新时间
-     * @param updateTime 更新时间
+     * 文章id
+     * @param articleId 文章id
      */
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setArticleId(Integer articleId) {
+        this.articleId = articleId;
     }
 
     /**
@@ -156,6 +166,38 @@ public class MtBackground implements Serializable {
         this.status = status;
     }
 
+    /**
+     * 超链接
+     * @return href 超链接
+     */
+    public String getHref() {
+        return href;
+    }
+
+    /**
+     * 超链接
+     * @param href 超链接
+     */
+    public void setHref(String href) {
+        this.href = href == null ? null : href.trim();
+    }
+
+    /**
+     * 更新时间
+     * @return update_time 更新时间
+     */
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    /**
+     * 更新时间
+     * @param updateTime 更新时间
+     */
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -164,11 +206,13 @@ public class MtBackground implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", img=").append(img);
-        sb.append(", updateTime=").append(updateTime);
+        sb.append(", articleId=").append(articleId);
         sb.append(", cateId=").append(cateId);
         sb.append(", navId=").append(navId);
         sb.append(", tagId=").append(tagId);
         sb.append(", status=").append(status);
+        sb.append(", href=").append(href);
+        sb.append(", updateTime=").append(updateTime);
         sb.append("]");
         return sb.toString();
     }

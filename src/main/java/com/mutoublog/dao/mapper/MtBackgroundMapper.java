@@ -4,13 +4,15 @@ import com.mutoublog.dao.entity.MtBackground;
 import com.mutoublog.dao.entity.MtBackgroundExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MtBackgroundMapper {
     long countByExample(MtBackgroundExample example);
 
     int deleteByExample(MtBackgroundExample example);
 
-    int deleteByPrimaryKey(Byte id);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(MtBackground record);
 
@@ -18,7 +20,7 @@ public interface MtBackgroundMapper {
 
     List<MtBackground> selectByExample(MtBackgroundExample example);
 
-    MtBackground selectByPrimaryKey(Byte id);
+    MtBackground selectByPrimaryKey(Integer id);
 
     int updateByExampleSelective(@Param("record") MtBackground record, @Param("example") MtBackgroundExample example);
 

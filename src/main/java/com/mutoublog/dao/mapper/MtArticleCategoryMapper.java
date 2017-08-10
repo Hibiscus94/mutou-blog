@@ -4,7 +4,9 @@ import com.mutoublog.dao.entity.MtArticleCategory;
 import com.mutoublog.dao.entity.MtArticleCategoryExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface MtArticleCategoryMapper {
     long countByExample(MtArticleCategoryExample example);
 

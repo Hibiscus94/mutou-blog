@@ -7,12 +7,6 @@ import java.net.URLConnection;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Description
- *
- * @author wuhana@zbj.com
- * @Date 2017/6/8
- */
 public class HttpRequestUtil {
     /**
      * 编码

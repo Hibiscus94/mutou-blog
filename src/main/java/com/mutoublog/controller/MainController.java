@@ -21,15 +21,6 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String index() {
-        byte isValid = (byte)1;
-//        List<MtUser> data = userService.getUsersByClause(isValid);
-        ModelAndView modelAndView  = new ModelAndView();
-        modelAndView.setViewName("index/index");
-//        modelAndView.addObject("list", data);
-        modelAndView.addObject("title", "Spring MVC And Freemarker");
-        modelAndView.addObject("content", " Hello world ， test my first spring mvc ! ");
-
-
 
         return "home/index/index";
     }

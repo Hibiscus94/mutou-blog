@@ -2,13 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mutoublog.dao.mapper.MtBackgroundMapper">
   <resultMap id="BaseResultMap" type="com.mutoublog.dao.entity.MtBackground">
-    <id column="id" jdbcType="TINYINT" property="id" />
+    <id column="id" jdbcType="INTEGER" property="id" />
     <result column="img" jdbcType="VARCHAR" property="img" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="article_id" jdbcType="INTEGER" property="articleId" />
     <result column="cate_id" jdbcType="TINYINT" property="cateId" />
     <result column="nav_id" jdbcType="TINYINT" property="navId" />
     <result column="tag_id" jdbcType="TINYINT" property="tagId" />
     <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="href" jdbcType="VARCHAR" property="href" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +71,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, img, update_time, cate_id, nav_id, tag_id, status
+    id, img, article_id, cate_id, nav_id, tag_id, status, href, update_time
   </sql>
   <select id="selectByExample" parameterType="com.mutoublog.dao.entity.MtBackgroundExample" resultMap="BaseResultMap">
     select
@@ -86,15 +88,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Byte" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from mt_background
-    where id = #{id,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Byte">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from mt_background
-    where id = #{id,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
   </delete>
   <delete id="deleteByExample" parameterType="com.mutoublog.dao.entity.MtBackgroundExample">
     delete from mt_background
@@ -103,18 +105,18 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.mutoublog.dao.entity.MtBackground">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Byte">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into mt_background (img, update_time, cate_id, 
-      nav_id, tag_id, status
-      )
-    values (#{img,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{cateId,jdbcType=TINYINT}, 
-      #{navId,jdbcType=TINYINT}, #{tagId,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}
-      )
+    insert into mt_background (img, article_id, cate_id, 
+      nav_id, tag_id, status, 
+      href, update_time)
+    values (#{img,jdbcType=VARCHAR}, #{articleId,jdbcType=INTEGER}, #{cateId,jdbcType=TINYINT}, 
+      #{navId,jdbcType=TINYINT}, #{tagId,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
+      #{href,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.mutoublog.dao.entity.MtBackground">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Byte">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into mt_background
@@ -122,8 +124,8 @@
       <if test="img != null">
         img,
       </if>
-      <if test="updateTime != null">
-        update_time,
+      <if test="articleId != null">
+        article_id,
       </if>
       <if test="cateId != null">
         cate_id,
@@ -137,13 +139,19 @@
       <if test="status != null">
         status,
       </if>
+      <if test="href != null">
+        href,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="img != null">
         #{img,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
+      <if test="articleId != null">
+        #{articleId,jdbcType=INTEGER},
       </if>
       <if test="cateId != null">
         #{cateId,jdbcType=TINYINT},
@@ -157,6 +165,12 @@
       <if test="status != null">
         #{status,jdbcType=TINYINT},
       </if>
+      <if test="href != null">
+        #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.mutoublog.dao.entity.MtBackgroundExample" resultType="java.lang.Long">
@@ -169,13 +183,13 @@
     update mt_background
     <set>
       <if test="record.id != null">
-        id = #{record.id,jdbcType=TINYINT},
+        id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.img != null">
         img = #{record.img,jdbcType=VARCHAR},
       </if>
-      <if test="record.updateTime != null">
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      <if test="record.articleId != null">
+        article_id = #{record.articleId,jdbcType=INTEGER},
       </if>
       <if test="record.cateId != null">
         cate_id = #{record.cateId,jdbcType=TINYINT},
@@ -189,6 +203,12 @@
       <if test="record.status != null">
         status = #{record.status,jdbcType=TINYINT},
       </if>
+      <if test="record.href != null">
+        href = #{record.href,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -196,13 +216,15 @@
   </update>
   <update id="updateByExample" parameterType="map">
     update mt_background
-    set id = #{record.id,jdbcType=TINYINT},
+    set id = #{record.id,jdbcType=INTEGER},
       img = #{record.img,jdbcType=VARCHAR},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      article_id = #{record.articleId,jdbcType=INTEGER},
       cate_id = #{record.cateId,jdbcType=TINYINT},
       nav_id = #{record.navId,jdbcType=TINYINT},
       tag_id = #{record.tagId,jdbcType=TINYINT},
-      status = #{record.status,jdbcType=TINYINT}
+      status = #{record.status,jdbcType=TINYINT},
+      href = #{record.href,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -213,8 +235,8 @@
       <if test="img != null">
         img = #{img,jdbcType=VARCHAR},
       </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      <if test="articleId != null">
+        article_id = #{articleId,jdbcType=INTEGER},
       </if>
       <if test="cateId != null">
         cate_id = #{cateId,jdbcType=TINYINT},
@@ -228,17 +250,25 @@
       <if test="status != null">
         status = #{status,jdbcType=TINYINT},
       </if>
+      <if test="href != null">
+        href = #{href,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
-    where id = #{id,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mutoublog.dao.entity.MtBackground">
     update mt_background
     set img = #{img,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      article_id = #{articleId,jdbcType=INTEGER},
       cate_id = #{cateId,jdbcType=TINYINT},
       nav_id = #{navId,jdbcType=TINYINT},
       tag_id = #{tagId,jdbcType=TINYINT},
-      status = #{status,jdbcType=TINYINT}
-    where id = #{id,jdbcType=TINYINT}
+      status = #{status,jdbcType=TINYINT},
+      href = #{href,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>
