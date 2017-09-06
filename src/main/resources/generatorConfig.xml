@@ -186,7 +186,7 @@ jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=utf8&zeroDate
             注意，table里面很多参数都是对javaModelGenerator，context等元素的默认属性的一个复写；
          -->
 
-        <table tableName="mt_background" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
+        <table tableName="mt_article_content" enableCountByExample="true" enableUpdateByExample="true" enableDeleteByExample="true" enableSelectByExample="true" selectByExampleQueryId="true">
 
             <!-- 参考 javaModelGenerator 的 constructorBased属性-->
             <!--<property name="constructorBased" value="false"/>-->

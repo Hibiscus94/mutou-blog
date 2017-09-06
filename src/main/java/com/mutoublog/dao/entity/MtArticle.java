@@ -105,11 +105,6 @@ public class MtArticle implements Serializable {
     private Date updateTime;
 
     /**
-     * 内容
-     */
-    private String content;
-
-    /**
      * mt_article
      */
     private static final long serialVersionUID = 1L;
@@ -434,22 +429,6 @@ public class MtArticle implements Serializable {
         this.updateTime = updateTime;
     }
 
-    /**
-     * 内容
-     * @return content 内容
-     */
-    public String getContent() {
-        return content;
-    }
-
-    /**
-     * 内容
-     * @param content 内容
-     */
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -476,7 +455,6 @@ public class MtArticle implements Serializable {
         sb.append(", createDate=").append(createDate);
         sb.append(", createTime=").append(createTime);
         sb.append(", updateTime=").append(updateTime);
-        sb.append(", content=").append(content);
         sb.append("]");
         return sb.toString();
     }

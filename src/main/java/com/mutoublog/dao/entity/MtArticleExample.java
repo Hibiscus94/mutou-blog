@@ -75,7 +75,7 @@ public class MtArticleExample {
     }
 
     /**
-     * mt_article 2017-06-19
+     * mt_article 2017-09-06
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1426,7 +1426,7 @@ public class MtArticleExample {
     }
 
     /**
-     * mt_article 2017-06-19
+     * mt_article 2017-09-06
      */
     public static class Criterion {
         private String condition;

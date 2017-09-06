@@ -150,15 +150,13 @@
       tags, link, sort, cover, 
       view, is_top, status, 
       comment_count, comment_status, create_year, 
-      create_date, create_time, update_time, 
-      content)
+      create_date, create_time, update_time)
     values (#{uid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{cateId,jdbcType=TINYINT}, 
       #{author,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR}, #{brief,jdbcType=VARCHAR}, 
       #{tags,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{cover,jdbcType=VARCHAR}, 
       #{view,jdbcType=INTEGER}, #{isTop,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, 
       #{commentCount,jdbcType=SMALLINT}, #{commentStatus,jdbcType=TINYINT}, #{createYear,jdbcType=SMALLINT}, 
-      #{createDate,jdbcType=DATE}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{content,jdbcType=LONGVARCHAR})
+      #{createDate,jdbcType=DATE}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.mutoublog.dao.entity.MtArticle">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Integer">
@@ -223,9 +221,6 @@
       <if test="updateTime != null">
         update_time,
       </if>
-      <if test="content != null">
-        content,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uid != null">
@@ -284,9 +279,6 @@
       </if>
       <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
       </if>
     </trim>
   </insert>
@@ -359,9 +351,6 @@
       <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=LONGVARCHAR},
-      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -388,8 +377,7 @@
       create_year = #{record.createYear,jdbcType=SMALLINT},
       create_date = #{record.createDate,jdbcType=DATE},
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      content = #{record.content,jdbcType=LONGVARCHAR}
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -480,9 +468,6 @@
       <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="content != null">
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -506,8 +491,7 @@
       create_year = #{createYear,jdbcType=SMALLINT},
       create_date = #{createDate,jdbcType=DATE},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      content = #{content,jdbcType=LONGVARCHAR}
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.mutoublog.dao.entity.MtArticle">
