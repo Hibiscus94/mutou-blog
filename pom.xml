@@ -29,8 +29,7 @@
         <maven-compiler-plugin.version>3.6.1</maven-compiler-plugin.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <mybatis-generator-commentgenerator.version>1.0</mybatis-generator-commentgenerator.version>
-        <jackson-mapper-asl.version>1.9.13</jackson-mapper-asl.version>
-        <jackson-core-asl.version>1.9.13</jackson-core-asl.version>
+       
     </properties>
 
     <dependencies>
